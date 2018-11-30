@@ -54,19 +54,13 @@ import { stringify } from "querystring";
   <Notification seen={seen}>
     <Flex alignCenter justifyBetween>
       <Title>
-        <Store.Consumer>
-          {store=>store.message}
-        </Store.Consumer>
+        {text}
       </Title>
       <FlexItem>
         <Fragment>
-          <Store.Consumer>
-            {store=>(
-            <Button success seen={seen} onClick={store.changeMessge}>
-              <FontAwesome name="check" />
-            </Button>
-            )}
-          </Store.Consumer>
+          <Button success seen={seen} onClick={() => {}}>
+            <FontAwesome name="check" />
+          </Button>
           <Button danger seen={seen} onClick={() => {}}>
             <FontAwesome name="times" />
           </Button>

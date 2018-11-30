@@ -4,20 +4,24 @@ import Store from "store";
  class AppContainer extends Component {
   constructor(props){
     super(props);
-    this._changeMessage = () =>{
-      if(this.state.message==="hello"){
-        this.setState({
-          message:"Bye bye"
-        });
-      }else{
-        this.setState({
-          message:"hello"
-        })
-      }
-    }
     this.state={
-      message:"hello",
-      changeMessge:this._changeMessage
+      notifications:{
+        "1":{
+          id:1,
+          text:"Somethis",
+          seen:false
+        },
+        "2":{
+          id:2,
+          text:"Somethis two",
+          seen:false
+        },
+        "3":{
+          id:2,
+          text:"Somethis third",
+          seen:false
+        }
+      }
     };    
   }
   render() {
