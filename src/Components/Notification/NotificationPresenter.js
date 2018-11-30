@@ -6,7 +6,7 @@ import FontAwesome from "react-fontawesome";
 import Store from "store";
 import { stringify } from "querystring";
 
- const Notification = styled.div`
+const Notification = styled.div`
   background-color: white;
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
   width: 80%;
@@ -16,10 +16,10 @@ import { stringify } from "querystring";
   box-sizing: border-box;
   border: 2px solid ${props => (props.seen ? "transparent" : "#f1c40f")};
 `;
- const Title = styled.span`
+const Title = styled.span`
   font-weight: 600;
 `;
- const Button = styled.button`
+const Button = styled.button`
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -50,28 +50,32 @@ import { stringify } from "querystring";
     transform: translateY(1px);
   }
 `;
- const NotificationPresenter = ({ id, text, seen }) => (
+const NotificationPresenter = ({ id, text, seen }) => (
   <Notification seen={seen}>
     <Flex alignCenter justifyBetween>
       <Title>
         {text}
       </Title>
       <FlexItem>
-        <Fragment>
-          <Button success seen={seen} onClick={() => {}}>
-            <FontAwesome name="check" />
-          </Button>
-          <Button danger seen={seen} onClick={() => {}}>
-            <FontAwesome name="times" />
-          </Button>
-        </Fragment>
+        <Store.Consumer>
+          {store => (
+            <Fragment>
+              <Button success seen={seen} onClick={() => store.seeNotification(id)}>
+                <FontAwesome name="check" />
+              </Button>
+              <Button danger seen={seen} onClick={() => store.deleteNotification(id)}>
+                <FontAwesome name="times" />
+              </Button>
+            </Fragment>
+          )}
+        </Store.Consumer>
       </FlexItem>
     </Flex>
   </Notification>
 );
- NotificationPresenter.propTypes = {
+NotificationPresenter.propTypes = {
   text: PropTypes.string.isRequired,
   seen: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired
 };
- export default NotificationPresenter;
+export default NotificationPresenter;
